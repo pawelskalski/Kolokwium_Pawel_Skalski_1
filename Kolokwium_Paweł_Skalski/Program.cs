@@ -3,12 +3,11 @@ using System.Runtime.InteropServices;
 
 namespace Kolokwium_Paweł_Skalski
 {
-    class Program
+    class MyClassFirst
     {
-        
-        static float MakeNumberStandard(float number)
+        public static float MakeNumberStandard(float number)
         {
-            if (50 > number || number>150)
+            if (50 > number || number > 150)
             {
                 throw new Exception("Number out of range, please give number between 50 and 150");
             }
@@ -17,20 +16,23 @@ namespace Kolokwium_Paweł_Skalski
                 return (number - 50) / (150 - 50);
             }
         }
+    }
 
-        static bool DoNumberAreCorrect(float[] array)
+    class MyClassSecond
+    {
+        public bool DoNumberAreCorrect(float[] array)
         {
             var index = 0;
             var result = true;
             foreach (var number in array)
             {
-                if (number%index+1==0)
+                if (number % index + 1 == 0)
                 {
-                    Console.WriteLine("Liczba: "+number+" o indeksie: "+index+" spełnia warunek");
+                    Console.WriteLine("Liczba: " + number + " o indeksie: " + index + " spełnia warunek");
                 }
                 else
                 {
-                    Console.WriteLine("Liczba: "+number+" o indeksie: "+index+" nie spełnia warunku");
+                    Console.WriteLine("Liczba: " + number + " o indeksie: " + index + " nie spełnia warunku");
                     result = false;
                 }
 
@@ -39,8 +41,11 @@ namespace Kolokwium_Paweł_Skalski
 
             return result;
         }
+    }
 
-        static void TryingMyLuck(int[][] array)
+    class MyClassThird
+    {
+        public void TryingMyLuck(int[][] array)
         {
             var max = 0;
             var bigestDepartmendId = 0;
@@ -54,6 +59,7 @@ namespace Kolokwium_Paweł_Skalski
                     max = subArray.Length;
                     bigestDepartmendId = index;
                 }
+
                 foreach (var worker in subArray)
                 {
                     if (worker > newestWorkerId)
@@ -62,22 +68,34 @@ namespace Kolokwium_Paweł_Skalski
                         newsestWordkerDepartmentId = index;
                     }
                 }
+
                 index += 1;
             }
-            Console.WriteLine("Dział z największą ilością pracowników to dział ma ID: "+bigestDepartmendId + " ma: "+max+" pracowników");
-            Console.WriteLine("Pracownik z najkrótszym stażem ma id: "+newestWorkerId+" pracuje w dziale o id: "+newsestWordkerDepartmentId);
 
-        }
-        static void Main(string[] args)
-        {
-            float[] table = new float[] {1, 2, 3, 4, 5};
-            int[][] array= new int[][] {new int[]{20,2,3,4,5,7,8},new int[]{9,10,11,12,13,14,15,16}};
-            Console.WriteLine(MakeNumberStandard(100));
-//            DoNumberAreCorrect(table);
-//            TryingMyLuck(array);
-            
+            Console.WriteLine("Dział z największą ilością pracowników to dział ma ID: " + bigestDepartmendId + " ma: " +
+                              max + " pracowników");
+            Console.WriteLine("Pracownik z najkrótszym stażem ma id: " + newestWorkerId + " pracuje w dziale o id: " +
+                              newsestWordkerDepartmentId);
         }
     }
-    
-}
 
+    class Program
+    {
+        static void Main(string[] args)
+        {
+//            Zadanie pierwsze
+            float[] table = new float[] {1, 2, 3, 4, 5};
+            Console.WriteLine(MyClassFirst.MakeNumberStandard(22));
+
+
+//            Zadanie drugie
+            MyClassSecond myClassSecond = new MyClassSecond();
+            myClassSecond.DoNumberAreCorrect(table);
+
+//            Zadaanie trzecie
+            int[][] array = new int[][] {new int[] {20, 2, 3, 4, 5, 7, 8}, new int[] {9, 10, 11, 12, 13, 14, 15, 16}};
+            MyClassThird myClassThird = new MyClassThird();
+            myClassThird.TryingMyLuck(array);
+        }
+    }
+}
